@@ -7,39 +7,80 @@ const HomePage = () => {
   const [topStories, setTopStories] = useState([]);
 
   useEffect(() => {
-      const stories = fetch(
-        "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty"
-      )
-        .then((response) => response.json())
-        .then(async (result) => {
-          const promises = 
-          result.slice(0, 10)
-          .map(id =>
-            fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(
-              response => response.json()
-            )
+    const stories = fetch(
+      "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty"
+    )
+      .then((response) => response.json())
+      .then(async (result) => {
+        const promises = result
+          .slice(0, 10)
+          .map((id) =>
+            fetch(
+              `https://hacker-news.firebaseio.com/v0/item/${id}.json`
+            ).then((response) => response.json())
           );
         const stories = await Promise.all(promises);
         setTopStories(stories);
-        });
+      });
   }, []);
 
-
-
+  const storyContainer = (story) => {
+    return (
+      <div
+        style={{
+          height: "80px",
+          width: "350px",
+          border: "1px solid black",
+          margin: "10px",
+          borderRadius: "10px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {story.title}
+      </div>
+    );
+  };
 
   return (
-      <div>
-        <ul>
-            {
-                topStories.map( story => {
-                  return  <li>{story.title} </li>
-                })
-            }
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <div
+        style={{
+          width: "400px",
+          height: "80px",
+          backgroundColor: "red",
+          marginTop: "30px",
+          justifyContent: "center",
+          padding: "10px",
+          fontWeight: 600,
+          borderRadius: "10px",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <text
+          style={{
+            height: "30px",
+            alignContet: "center",
+            justifyContent: "center",
+          }}
+        >
+          Welcome to HackerNews
+        </text>
+      </div>
 
-        </ul>
+      <div
+        style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+      >
+        {topStories.map((story) => {
+          return storyContainer(story);
+        })}
+      </div>
     </div>
-
-  )
+  );
 };
 
 export default HomePage;
