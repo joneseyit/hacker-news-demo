@@ -5,15 +5,15 @@ const HomePage = () => {
   const storyURL = `${baseURL}/item/`;
 
   const [topStories, setTopStories] = useState([]);
-
+  console.log(topStories);
   useEffect(() => {
     const stories = fetch(
-      "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty"
+      "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty?limit=10"
     )
       .then((response) => response.json())
       .then(async (result) => {
         const promises = result
-          .slice(0, 10)
+          // .slice(0, 10)
           .map((id) =>
             fetch(
               `https://hacker-news.firebaseio.com/v0/item/${id}.json`
@@ -26,20 +26,10 @@ const HomePage = () => {
 
   const storyContainer = (story) => {
     return (
-      <div
-        style={{
-          height: "80px",
-          width: "350px",
-          border: "1px solid black",
-          margin: "10px",
-          borderRadius: "10px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {story.title}
-      </div>
+      <a href={story.url} target="_blank">
+        <div className="card">{story.title}</div>
+        {story.type}
+      </a>
     );
   };
 
@@ -71,9 +61,12 @@ const HomePage = () => {
           Welcome to HackerNews
         </text>
       </div>
-
       <div
-        style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
       >
         {topStories.map((story) => {
           return storyContainer(story);
