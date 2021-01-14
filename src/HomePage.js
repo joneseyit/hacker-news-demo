@@ -1,13 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 
 const HomePage = () => {
   const baseURL = "https://hacker-news.firebaseio.com/v0/";
   const storyURL = `${baseURL}/item/`;
 
   const [topStories, setTopStories] = useState([]);
-  const [filteredStories, setFilteredStories] = useState([]);
-  const [searchTerm, setSearchTerm] = useState([]);
+  // const [filteredStories, setFilteredStories] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [storyType, setStoryType] = useState("");
 
+  
+  //memorizing function - dependency array
+  const filteredStories = useMemo(() => {
+    if(!searchTerm && !storyType) return topStories
+    return topStories.filter(story => {
+      return story.title.toLowerCase().includes(searchTerm.toLowerCase()) && (storyType? (story.type === storyType) : true)
+    })
+  }, [searchTerm, topStories, storyType])
+
+  console.log(storyType, "StoryType=========");
 
   useEffect(() => {
     const stories = fetch(
@@ -31,16 +42,10 @@ const HomePage = () => {
     return (
       <a href={story.url} target="_blank">
         <div className="card">{story.title}</div>
+        <div>{story.type}</div>
       </a>
     );
   };
-
-  const updateFilteredList = (term) => {
-    let sanitizeTerm = term.toLowerCase();
-    let newList = topStories.filter(x => x.title.toLowerCase().includes(sanitizeTerm));
-    setFilteredStories(newList);
-    setSearchTerm(term);
-  }
 
   return (
     <div
@@ -70,14 +75,21 @@ const HomePage = () => {
           Welcome to HackerNews
         </text>
       </div>
-      <div marginTop="20px" >
-        <input 
+      <div marginTop="20px">
+        <input
           onChange={(e) => {
             setSearchTerm(e.target.value);
-            updateFilteredList(e.target.value)
-          
-          } }
+          }}
         />
+        <label for="storyType">Choose a story type:</label>
+
+<select name="storyType" id="storyType" onChange={(e) => setStoryType(e.target.value)} >
+  <option value="" >Choose a value </option>
+  <option value="job">Job</option>
+  <option value="story">Story</option>
+  <option value="comment">Comment</option>
+  <option value="poll">Poll</option>
+</select>
       </div>
       <div
         style={{
@@ -86,7 +98,7 @@ const HomePage = () => {
           justifyContent: "center",
         }}
       >
-        {(searchTerm.length > 0 ? filteredStories : topStories).map((story) => {
+        {(filteredStories).map((story) => {
           return storyContainer(story);
         })}
       </div>
