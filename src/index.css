@@ -15,14 +15,16 @@ code {
 .card {
   height: 80px;
   width: 350px;
-  border: 1px solid black;
+  /* box-shadow: 0 0 0 2pt red; */
+  /* outline: 1px solid black; */
   margin: 10px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .card:hover {
-  border: 3px solid blue;
+  /* outline: 3px solid blue; */
+  box-shadow: 0 0 0 2pt red;
 }

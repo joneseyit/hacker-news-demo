@@ -5,7 +5,10 @@ const HomePage = () => {
   const storyURL = `${baseURL}/item/`;
 
   const [topStories, setTopStories] = useState([]);
-  console.log(topStories);
+  const [filteredStories, setFilteredStories] = useState([]);
+  const [searchTerm, setSearchTerm] = useState([]);
+
+
   useEffect(() => {
     const stories = fetch(
       "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty?limit=10"
@@ -28,10 +31,16 @@ const HomePage = () => {
     return (
       <a href={story.url} target="_blank">
         <div className="card">{story.title}</div>
-        {story.type}
       </a>
     );
   };
+
+  const updateFilteredList = (term) => {
+    let sanitizeTerm = term.toLowerCase();
+    let newList = topStories.filter(x => x.title.toLowerCase().includes(sanitizeTerm));
+    setFilteredStories(newList);
+    setSearchTerm(term);
+  }
 
   return (
     <div
@@ -46,7 +55,7 @@ const HomePage = () => {
           justifyContent: "center",
           padding: "10px",
           fontWeight: 600,
-          borderRadius: "10px",
+          // borderRadius: "10px",
           display: "flex",
           alignItems: "center",
         }}
@@ -61,6 +70,15 @@ const HomePage = () => {
           Welcome to HackerNews
         </text>
       </div>
+      <div marginTop="20px" >
+        <input 
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            updateFilteredList(e.target.value)
+          
+          } }
+        />
+      </div>
       <div
         style={{
           display: "flex",
@@ -68,7 +86,7 @@ const HomePage = () => {
           justifyContent: "center",
         }}
       >
-        {topStories.map((story) => {
+        {(searchTerm.length > 0 ? filteredStories : topStories).map((story) => {
           return storyContainer(story);
         })}
       </div>
