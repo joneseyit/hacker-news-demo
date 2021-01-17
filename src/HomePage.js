@@ -9,16 +9,20 @@ const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [storyType, setStoryType] = useState("");
 
-  
   //memorizing function - dependency array
   const filteredStories = useMemo(() => {
-    if(!searchTerm && !storyType) return topStories
-    return topStories.filter(story => {
-      return story.title.toLowerCase().includes(searchTerm.toLowerCase()) && (storyType? (story.type === storyType) : true)
-    })
-  }, [searchTerm, topStories, storyType])
-
-  console.log(storyType, "StoryType=========");
+    if (!searchTerm && !storyType) return topStories;
+    if (!storyType)
+      return topStories.filter((story) =>
+        story.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    if (!searchTerm)
+      return topStories.filter((story) => story.type === storyType);
+    return topStories.filter((story) => {
+      story.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        (storyType ? story.type === storyType : true);
+    });
+  }, [searchTerm, topStories, storyType]);
 
   useEffect(() => {
     const stories = fetch(
@@ -83,13 +87,17 @@ const HomePage = () => {
         />
         <label for="storyType">Choose a story type:</label>
 
-<select name="storyType" id="storyType" onChange={(e) => setStoryType(e.target.value)} >
-  <option value="" >Choose a value </option>
-  <option value="job">Job</option>
-  <option value="story">Story</option>
-  <option value="comment">Comment</option>
-  <option value="poll">Poll</option>
-</select>
+        <select
+          name="storyType"
+          id="storyType"
+          onChange={(e) => setStoryType(e.target.value)}
+        >
+          <option value="">Choose a value </option>
+          <option value="job">Job</option>
+          <option value="story">Story</option>
+          <option value="comment">Comment</option>
+          <option value="poll">Poll</option>
+        </select>
       </div>
       <div
         style={{
@@ -98,7 +106,7 @@ const HomePage = () => {
           justifyContent: "center",
         }}
       >
-        {(filteredStories).map((story) => {
+        {filteredStories.map((story) => {
           return storyContainer(story);
         })}
       </div>
