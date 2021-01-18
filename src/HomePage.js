@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useMemo } from "react";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 
 const HomePage = () => {
   const baseURL = "https://hacker-news.firebaseio.com/v0/";
-  // const storyURL = `${baseURL}/item/`;
 
   const [topStories, setTopStories] = useState([]);
   // const [filteredStories, setFilteredStories] = useState([]);
@@ -18,10 +19,14 @@ const HomePage = () => {
         story.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
 
-    if (!searchTerm) return topStories.filter((story) => story.type === storyType);
+    if (!searchTerm)
+      return topStories.filter((story) => story.type === storyType);
 
     return topStories.filter((story) => {
-      return story.title.toLowerCase().includes(searchTerm.toLowerCase()) && (storyType ? story.type === storyType : true);
+      return (
+        story.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        (storyType ? story.type === storyType : true)
+      );
     });
   }, [searchTerm, topStories, storyType]);
 
@@ -107,9 +112,13 @@ const HomePage = () => {
           justifyContent: "center",
         }}
       >
-        {filteredStories.map((story) => {
-          return storyContainer(story);
-        })}
+        {filteredStories.length === 0 ? (
+          <Loader type="Puff" color="#00BFFF" height={100} width={100} />
+        ) : (
+          filteredStories.map((story) => {
+            return storyContainer(story);
+          })
+        )}
       </div>
     </div>
   );
