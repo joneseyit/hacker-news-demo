@@ -16,11 +16,9 @@ const HomePage = () => {
       return topStories.filter((story) =>
         story.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
-    if (!searchTerm)
-      return topStories.filter((story) => story.type === storyType);
+    if (!searchTerm) return topStories.filter((story) => story.type === storyType);
     return topStories.filter((story) => {
-      story.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        (storyType ? story.type === storyType : true);
+      return story.title.toLowerCase().includes(searchTerm.toLowerCase()) && (storyType ? story.type === storyType : true);
     });
   }, [searchTerm, topStories, storyType]);
 
