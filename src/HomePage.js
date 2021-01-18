@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 
 const HomePage = () => {
   const baseURL = "https://hacker-news.firebaseio.com/v0/";
-  const storyURL = `${baseURL}/item/`;
+  // const storyURL = `${baseURL}/item/`;
 
   const [topStories, setTopStories] = useState([]);
   // const [filteredStories, setFilteredStories] = useState([]);
@@ -12,11 +12,14 @@ const HomePage = () => {
   //memorizing function - dependency array
   const filteredStories = useMemo(() => {
     if (!searchTerm && !storyType) return topStories;
+
     if (!storyType)
       return topStories.filter((story) =>
         story.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
+
     if (!searchTerm) return topStories.filter((story) => story.type === storyType);
+
     return topStories.filter((story) => {
       return story.title.toLowerCase().includes(searchTerm.toLowerCase()) && (storyType ? story.type === storyType : true);
     });
