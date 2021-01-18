@@ -1,19 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 
 const HomePage = () => {
   const baseURL = "https://hacker-news.firebaseio.com/v0/";
   const storyURL = `${baseURL}/item/`;
 
   const [topStories, setTopStories] = useState([]);
+  // const [filteredStories, setFilteredStories] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [storyType, setStoryType] = useState("");
+
+  //memorizing function - dependency array
+  const filteredStories = useMemo(() => {
+    if (!searchTerm && !storyType) return topStories;
+    if (!storyType)
+      return topStories.filter((story) =>
+        story.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    if (!searchTerm) return topStories.filter((story) => story.type === storyType);
+    return topStories.filter((story) => {
+      return story.title.toLowerCase().includes(searchTerm.toLowerCase()) && (storyType ? story.type === storyType : true);
+    });
+  }, [searchTerm, topStories, storyType]);
 
   useEffect(() => {
     const stories = fetch(
-      "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty"
+      "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty?limit=10"
     )
       .then((response) => response.json())
       .then(async (result) => {
         const promises = result
-          .slice(0, 10)
+          // .slice(0, 10)
           .map((id) =>
             fetch(
               `https://hacker-news.firebaseio.com/v0/item/${id}.json`
@@ -26,20 +42,10 @@ const HomePage = () => {
 
   const storyContainer = (story) => {
     return (
-      <div
-        style={{
-          height: "80px",
-          width: "350px",
-          border: "1px solid black",
-          margin: "10px",
-          borderRadius: "10px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {story.title}
-      </div>
+      <a href={story.url} target="_blank">
+        <div className="card">{story.title}</div>
+        <div>{story.type}</div>
+      </a>
     );
   };
 
@@ -56,7 +62,7 @@ const HomePage = () => {
           justifyContent: "center",
           padding: "10px",
           fontWeight: 600,
-          borderRadius: "10px",
+          // borderRadius: "10px",
           display: "flex",
           alignItems: "center",
         }}
@@ -71,11 +77,34 @@ const HomePage = () => {
           Welcome to HackerNews
         </text>
       </div>
+      <div marginTop="20px">
+        <input
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
+        />
+        <label for="storyType">Choose a story type:</label>
 
+        <select
+          name="storyType"
+          id="storyType"
+          onChange={(e) => setStoryType(e.target.value)}
+        >
+          <option value="">Choose a value </option>
+          <option value="job">Job</option>
+          <option value="story">Story</option>
+          <option value="comment">Comment</option>
+          <option value="poll">Poll</option>
+        </select>
+      </div>
       <div
-        style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
       >
-        {topStories.map((story) => {
+        {filteredStories.map((story) => {
           return storyContainer(story);
         })}
       </div>

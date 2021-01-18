@@ -11,3 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.card {
+  height: 80px;
+  width: 350px;
+  /* box-shadow: 0 0 0 2pt red; */
+  /* outline: 1px solid black; */
+  margin: 10px;
+  /* border-radius: 10px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card:hover {
+  /* outline: 3px solid blue; */
+  box-shadow: 0 0 0 2pt red;
+}
