@@ -50,9 +50,11 @@ const HomePage = () => {
 
   const storyContainer = (story) => {
     return (
-      <a href={story.url} target="_blank">
-        <div className="card">{story.title}</div>
-        <div>{story.type}</div>
+      <a href={story?.url} target="_blank">
+        <div className="card">
+          {story?.title}
+          <br/> Type: {story?.type}
+        </div>
       </a>
     );
   };

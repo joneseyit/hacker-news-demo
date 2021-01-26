@@ -18,13 +18,15 @@ code {
   /* box-shadow: 0 0 0 2pt red; */
   /* outline: 1px solid black; */
   margin: 10px;
-  /* border-radius: 10px; */
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 4px 3px 8px 1px #969696;
+  -webkit-box-shadow: 4px 3px 8px 1px #969696;
 }
 
 .card:hover {
   /* outline: 3px solid blue; */
-  box-shadow: 0 0 0 2pt red;
+  box-shadow: 6px 4px 12px 2px #969696;
 }
