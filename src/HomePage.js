@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const baseURL = "https://hacker-news.firebaseio.com/v0/";
@@ -49,11 +50,25 @@ const HomePage = () => {
   }, []);
 
   const storyContainer = (story) => {
+    // let topComment = story?.kids?.[0];
+
+    // let comment = !!topComment?
+    //   fetch(`https://hacker-news.firebaseio.com/v0/item/${topComment}.json`)
+    //   .then(response => response.json())
+    //   .then(result => console.log(result.text))
+
+    //   : null;
+    console.log(story);
     return (
       <a href={story?.url} target="_blank">
         <div className="card">
-          {story?.title}
-          <br/> Type: {story?.type}
+          <div>
+            {story?.title}
+            <br /> Type: {story?.type}
+          </div>
+          <div>
+            <Link to={`/${story?.id}`}>See Comments</Link>
+          </div>
         </div>
       </a>
     );
@@ -64,7 +79,7 @@ const HomePage = () => {
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <div
-      className="title"
+        className="title"
         // style={{
         //   width: "400px",
         //   height: "80px",
@@ -79,12 +94,12 @@ const HomePage = () => {
         // }}
       >
         <text
-        
-          // style={{
-          //   height: "30px",
-          //   alignContet: "center",
-          //   justifyContent: "center",
-          // }}
+
+        // style={{
+        //   height: "30px",
+        //   alignContet: "center",
+        //   justifyContent: "center",
+        // }}
         >
           Welcome to HackerNews
         </text>
