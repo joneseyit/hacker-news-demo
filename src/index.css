@@ -12,6 +12,18 @@ code {
     monospace;
 }
 
+.title {
+  margin: 0;
+  padding: 0;
+  font-size: 3em;
+  font-family: Noto, serif;
+  color: #868080;
+  text-shadow: 2px 2px #000000;
+  text-transform: uppercase;
+  transition-duration: 1s;
+  -webkit-background-clip: text;
+}
+
 .card {
   height: 80px;
   width: 350px;
@@ -28,5 +40,5 @@ code {
 
 .card:hover {
   /* outline: 3px solid blue; */
-  box-shadow: 6px 4px 12px 2px #969696;
+  box-shadow: 6px 4px 12px 2px #646363;
 }

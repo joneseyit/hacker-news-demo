@@ -64,25 +64,27 @@ const HomePage = () => {
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <div
-        style={{
-          width: "400px",
-          height: "80px",
-          backgroundColor: "red",
-          marginTop: "30px",
-          justifyContent: "center",
-          padding: "10px",
-          fontWeight: 600,
-          // borderRadius: "10px",
-          display: "flex",
-          alignItems: "center",
-        }}
+      className="title"
+        // style={{
+        //   width: "400px",
+        //   height: "80px",
+        //   backgroundColor: "red",
+        //   marginTop: "30px",
+        //   justifyContent: "center",
+        //   padding: "10px",
+        //   fontWeight: 600,
+        //   // borderRadius: "10px",
+        //   display: "flex",
+        //   alignItems: "center",
+        // }}
       >
         <text
-          style={{
-            height: "30px",
-            alignContet: "center",
-            justifyContent: "center",
-          }}
+        
+          // style={{
+          //   height: "30px",
+          //   alignContet: "center",
+          //   justifyContent: "center",
+          // }}
         >
           Welcome to HackerNews
         </text>
