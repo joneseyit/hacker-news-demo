@@ -33,7 +33,7 @@ const HomePage = () => {
 
   useEffect(() => {
     const stories = fetch(
-      "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty?limit=10"
+      "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty?"
     )
       .then((response) => response.json())
       .then(async (result) => {
