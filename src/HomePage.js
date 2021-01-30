@@ -50,21 +50,12 @@ const HomePage = () => {
   }, []);
 
   const storyContainer = (story) => {
-    // let topComment = story?.kids?.[0];
-
-    // let comment = !!topComment?
-    //   fetch(`https://hacker-news.firebaseio.com/v0/item/${topComment}.json`)
-    //   .then(response => response.json())
-    //   .then(result => console.log(result.text))
-
-    //   : null;
-    console.log(story);
     return (
-      <a href={story?.url} target="_blank">
+      <a href={story?.url} target="_blank" style={{textDecoration: "none"}} >
         <div className="card">
           <div>
             {story?.title}
-            <br /> Type: {story?.type}
+            <span className="story-tag" > {story?.type}</span>
           </div>
           <div>
             <Link to={`/${story?.id}`}>See Comments</Link>

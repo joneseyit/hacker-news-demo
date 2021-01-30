@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import Loader from "react-loader-spinner";
+import {Link} from "react-router-dom";
 
 const ShowStory = (props) => {
     const params = useParams();
@@ -21,15 +22,28 @@ const ShowStory = (props) => {
         })
     }, [])
 
+    const listedComment = (comment) => {
+        return (
+        <div className="comment" >
+            <ul>
+                <li style={{textAlign: "left"}} dangerouslySetInnerHTML={{__html: comment.text}} />
+            </ul>
+         
+        </div>
+        )
+    }
 
     return (
         !story? <Loader type="Puff" color="#00BFFF" height={100} width={100} /> :
         (<div>
-            <div >
-                {console.log(comments, "   ================ comments")}
+            <Link to="/" >
+                <div>{"<<"} Back</div>
+            </Link>
+            <div className="storyTitle">
+                
                 {story.title}
-                {comments? comments[0].text : null}
             </div>
+                {comments? comments.map((comment) => {return listedComment(comment)}) : "This story has no comments yet..."}
             
         </div>)
     );
