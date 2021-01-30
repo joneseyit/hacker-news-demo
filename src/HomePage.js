@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const baseURL = "https://hacker-news.firebaseio.com/v0/";
@@ -32,7 +33,7 @@ const HomePage = () => {
 
   useEffect(() => {
     const stories = fetch(
-      "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty?limit=10"
+      "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty?"
     )
       .then((response) => response.json())
       .then(async (result) => {
@@ -50,9 +51,16 @@ const HomePage = () => {
 
   const storyContainer = (story) => {
     return (
-      <a href={story.url} target="_blank">
-        <div className="card">{story.title}</div>
-        <div>{story.type}</div>
+      <a href={story?.url} target="_blank" style={{textDecoration: "none"}} >
+        <div className="card">
+          <div>
+            {story?.title}
+            <span className="story-tag" > {story?.type}</span>
+          </div>
+          <div>
+            <Link to={`/${story?.id}`}>See Comments</Link>
+          </div>
+        </div>
       </a>
     );
   };
@@ -62,25 +70,27 @@ const HomePage = () => {
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <div
-        style={{
-          width: "400px",
-          height: "80px",
-          backgroundColor: "red",
-          marginTop: "30px",
-          justifyContent: "center",
-          padding: "10px",
-          fontWeight: 600,
-          // borderRadius: "10px",
-          display: "flex",
-          alignItems: "center",
-        }}
+        className="title"
+        // style={{
+        //   width: "400px",
+        //   height: "80px",
+        //   backgroundColor: "red",
+        //   marginTop: "30px",
+        //   justifyContent: "center",
+        //   padding: "10px",
+        //   fontWeight: 600,
+        //   // borderRadius: "10px",
+        //   display: "flex",
+        //   alignItems: "center",
+        // }}
       >
         <text
-          style={{
-            height: "30px",
-            alignContet: "center",
-            justifyContent: "center",
-          }}
+
+        // style={{
+        //   height: "30px",
+        //   alignContet: "center",
+        //   justifyContent: "center",
+        // }}
         >
           Welcome to HackerNews
         </text>

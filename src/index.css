@@ -1,30 +1,71 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
+.title {
+  margin: 0;
+  padding: 0;
+  font-size: 3em;
+  font-family: Noto, serif;
+  color: #868080;
+  text-shadow: 2px 2px #000000;
+  text-transform: uppercase;
+  transition-duration: 1s;
+  -webkit-background-clip: text;
+}
+
+.storyTitle {
+  font-size: 2em;
+  font-family: Noto, serif;
+  margin-top: 40px;
+}
+
 .card {
-  height: 80px;
   width: 350px;
   /* box-shadow: 0 0 0 2pt red; */
   /* outline: 1px solid black; */
   margin: 10px;
-  /* border-radius: 10px; */
+  border-radius: 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  box-shadow: 4px 3px 8px 1px #969696;
+  -webkit-box-shadow: 4px 3px 8px 1px #969696;
+  padding: 12px;
+  position: relative;
 }
 
 .card:hover {
   /* outline: 3px solid blue; */
-  box-shadow: 0 0 0 2pt red;
+  box-shadow: 6px 4px 12px 2px #646363;
+}
+
+.comment {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.story-tag {
+  padding: 4px 8px;
+  text-decoration: none;
+  background-color: #afacac;
+  color: white;
+  border-radius: 10px;
+  font-weight: bold;
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  text-align: center;
 }
