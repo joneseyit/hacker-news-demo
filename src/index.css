@@ -13,7 +13,7 @@ code {
 }
 
 .title {
-  margin: 0;
+  margin-top: 20px;
   padding: 0;
   font-size: 3em;
   font-family: Noto, serif;
@@ -74,3 +74,19 @@ code {
   font-size: 12px;
   margin-bottom: 40px;
 }
+
+.general-search-bar {
+  margin: 20px 20px 20px 0px;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.story-type-search-bar {
+  margin: 20px 20px 20px 0px;
+  padding: 5px;
+  height: 30px;
+  border-radius: 4px;
+}
+
+
+

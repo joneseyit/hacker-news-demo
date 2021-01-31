@@ -51,11 +51,11 @@ const HomePage = () => {
 
   const storyContainer = (story) => {
     return (
-      <a href={story?.url} target="_blank" style={{textDecoration: "none"}} >
+      <a href={story?.url} target="_blank" style={{ textDecoration: "none" }}>
         <div className="card">
           <div>
             {story?.title}
-            <span className="story-tag" > {story?.type}</span>
+            <span className="story-tag"> {story?.type}</span>
           </div>
           <div>
             <Link to={`/${story?.id}`}>See Comments</Link>
@@ -69,44 +69,24 @@ const HomePage = () => {
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <div
-        className="title"
-        // style={{
-        //   width: "400px",
-        //   height: "80px",
-        //   backgroundColor: "red",
-        //   marginTop: "30px",
-        //   justifyContent: "center",
-        //   padding: "10px",
-        //   fontWeight: 600,
-        //   // borderRadius: "10px",
-        //   display: "flex",
-        //   alignItems: "center",
-        // }}
-      >
-        <text
-
-        // style={{
-        //   height: "30px",
-        //   alignContet: "center",
-        //   justifyContent: "center",
-        // }}
-        >
-          Welcome to HackerNews
-        </text>
+      <div className="title">
+        <text>Welcome to HackerNews</text>
       </div>
       <div marginTop="20px">
+        <tex>Search by title: </tex>
         <input
           onChange={(e) => {
             setSearchTerm(e.target.value);
           }}
+          className="general-search-bar"
         />
-        <label for="storyType">Choose a story type:</label>
+        <label for="storyType">Choose a story type: </label>
 
         <select
           name="storyType"
           id="storyType"
           onChange={(e) => setStoryType(e.target.value)}
+          className="story-type-search-bar"
         >
           <option value="">Choose a value </option>
           <option value="job">Job</option>
