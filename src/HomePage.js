@@ -69,9 +69,7 @@ const HomePage = () => {
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <div className="title">
-        <text>Welcome to HackerNews</text>
-      </div>
+
       <div marginTop="20px">
         <tex>Search by title: </tex>
         <input
