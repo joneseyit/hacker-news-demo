@@ -13,6 +13,7 @@ code {
 }
 
 .title {
+  width: 100%;
   margin-top: 20px;
   padding: 0;
   font-size: 3em;
@@ -21,7 +22,10 @@ code {
   text-shadow: 2px 2px #000000;
   text-transform: uppercase;
   transition-duration: 1s;
-  -webkit-background-clip: text;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1;
 }
 
 .storyTitle {
@@ -73,6 +77,7 @@ code {
 .footer {
   font-size: 12px;
   margin-bottom: 40px;
+  background-color: white;
 }
 
 .general-search-bar {
