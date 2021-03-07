@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useContext } from "react";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import { Link } from "react-router-dom";
+import DarkModeContext from './DarkModeContext';
 
 const HomePage = () => {
   const baseURL = "https://hacker-news.firebaseio.com/v0/";
@@ -52,7 +53,7 @@ const HomePage = () => {
   const storyContainer = (story) => {
     return (
       <a href={story?.url} target="_blank" style={{ textDecoration: "none" }}>
-        <div className="card">
+        <div className={`card ${!!darkMode? "darkModeBackground" : "lightModeBackground"}`}>
           <div>
             {story?.title}
             <span className="story-tag"> {story?.type}</span>
@@ -65,13 +66,14 @@ const HomePage = () => {
     );
   };
 
+  const { darkMode } = useContext(DarkModeContext);
   return (
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
 
       <div marginTop="20px">
-        <tex>Search by title: </tex>
+        <text>Search by title: </text>
         <input
           onChange={(e) => {
             setSearchTerm(e.target.value);

@@ -5,15 +5,19 @@ import HomePage from "./HomePage";
 import ShowStory from "./ShowStory";
 import FooterLayout from "./FooterLayout";
 import Header from "./Header";
-import DarkModeContext from './DarkModeContext'
-
+import DarkModeContext from './DarkModeContext';
+import { darkTheme, lightTheme } from './Theme';
+import ToggleButton from './toggleButton'
+// import { Globa lStyles } from "./GlobalStyles";
 
 function App() {
-  const [darkMode, setDarkMode] =useState(true);
+  const [darkMode, setDarkMode]=useState(false);
 
   return (
-    <DarkModeContext.Provider value={{darkMode, setDarkMode}} >
-      <div className="App" className={darkMode? "darkModeBackground" : ""} >
+    <DarkModeContext.Provider value={{darkMode, setDarkMode}}  >
+    
+      <div className={!!darkMode? "darkModeBackground" : "lightModeBackground" }  >
+        <ToggleButton/>
         <Header />
         <Switch>
           <Route path="/:storyId">

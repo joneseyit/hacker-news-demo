@@ -14,6 +14,14 @@ code {
 
 .darkModeBackground {
   background-color: black;
+  text-align: center;
+  color: white;
+}
+
+.lightModeBackground {
+  background-color: white;
+  text-align: center;
+  color: black;
 }
 
 .title {
@@ -30,6 +38,12 @@ code {
   top: 0;
   background-color: white;
   z-index: 1;
+  position: relative;
+}
+
+.toggle-dark-mode {
+  position: absolute;
+  border-radius: 15px;
 }
 
 .storyTitle {
